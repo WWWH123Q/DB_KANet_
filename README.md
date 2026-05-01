@@ -1,7 +1,7 @@
 # DB-KANet: A Lightweight Network for Real-Time Precipitation Nowcasting
 
 <p align="center">
-  <img src="assets/architecture.png" width="850">
+  <img src="assets/architecture.jpg" width="850">
 </p>
 
 <p align="center">
@@ -47,10 +47,6 @@ With only **1.32M parameters** and **2.58 GFLOPs**, DB-KANet achieves a strong b
 
 ## Network Architecture
 
-<p align="center">
-  <img src="assets/architecture.png" width="850">
-</p>
-
 The overall framework of DB-KANet follows an encoder–decoder design with skip connections. DBAM and CKAN blocks are embedded into the network to improve feature representation while maintaining low computational cost.
 
 ### Dual-Branch Attention Module
@@ -81,10 +77,9 @@ The recommended repository structure is:
 ```text
 DB-KANet/
 ├── assets/
-│   ├── architecture.png
+│   ├── architecture.jpg
 │   ├── laps_visualization.png
-│   ├── shanghai_visualization.png
-│   └── results_curve.png
+│   └── shanghai_visualization.png
 ├── configs/
 │   └── config_setting.py
 ├── dataset/
