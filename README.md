@@ -1,11 +1,6 @@
 # DB-KANet: A Lightweight Network for Real-Time Precipitation Nowcasting
 
 
-
-<p align="center">
-  <b>A lightweight dual-branch Kolmogorov–Arnold network for efficient precipitation nowcasting</b>
-</p>
-
 <p align="center">
   <img src="https://img.shields.io/badge/Python-3.8-blue">
   <img src="https://img.shields.io/badge/PyTorch-1.10+-red">
