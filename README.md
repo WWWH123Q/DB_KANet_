@@ -1,108 +1,101 @@
-# DB_KANet_
-DB-KANet: Lightweight Dual–Branch Kolmogorov-Arnold Network for Cloud Mask Nowcasting
-![DB-KANet Architecture](./10.310.3DBNET.jpg)
-This repository contains the official PyTorch implementation for the paper: "DB-KANet: Lightweight Dual-Branch Kolmogorov-Arnold Network for Cloud Mask Nowcasting".
+# DB-KANet: A Lightweight Network for Real-Time Precipitation Nowcasting
 
-Lightweight design is crucial for enabling real-time deployment of meteorological models in industrial IoT and edge-computing scenarios. To address this challenge, we propose DB-KANet, a lightweight architecture that integrates Kolmogorov–Arnold Network (KAN) principles into a U-shaped encoder–decoder backbone, creating a model that is both compact and powerful.
+<p align="center">
+  <img src="assets/architecture.png" width="850">
+</p>
 
-Model Architecture
-The overall architecture of DB-KANet is a U-shaped encoder-decoder that integrates our proposed Dual-Branch Attention Module (DBAM) and Convolutional Kolmogorov-Arnold Network (CKAN) block for efficient multi-scale spatiotemporal modeling.
+<p align="center">
+  <b>A lightweight dual-branch Kolmogorov–Arnold network for efficient precipitation nowcasting</b>
+</p>
 
-https://assets/architecture.png
+<p align="center">
+  <img src="https://img.shields.io/badge/Python-3.8-blue">
+  <img src="https://img.shields.io/badge/PyTorch-1.10+-red">
+  <img src="https://img.shields.io/badge/Task-Precipitation%20Nowcasting-green">
+  <img src="https://img.shields.io/badge/Model-DB--KANet-orange">
+</p>
 
-Installation
-This code has been tested on Python 3.8, PyTorch 1.10, and CUDA 11.1.
-Clone the repository:
+---
 
-bash
-git clone https://github.com/WWWH123Q/DB_KANet.git
-cd DB_KANet
-Create a virtual environment (recommended):
+## Overview
 
-bash
-# Using conda
-conda create -n dbkanet python=3.8
-conda activate dbkanet
-Install dependencies:
+This repository provides the official PyTorch implementation of:
 
-bash
-pip install -r requirements.txt
-The main dependencies include:
+**DB-KANet: A Lightweight Network for Real-Time Precipitation Nowcasting**
 
-torch>=1.10.0
+DB-KANet is designed for real-time precipitation nowcasting under resource-constrained environments. It adopts a lightweight U-shaped encoder–decoder architecture and integrates Kolmogorov–Arnold Network principles into spatiotemporal precipitation prediction.
 
-torchvision>=0.11.0
+The proposed model introduces two key modules:
 
-numpy>=1.21.0
+- **Dual-Branch Attention Module (DBAM)**: captures both global spatiotemporal evolution and fine-grained local rainfall structures.
+- **Convolutional Kolmogorov–Arnold Network (CKAN)**: enhances nonlinear representation capacity for abrupt and complex precipitation dynamics.
 
-h5py>=3.6.0
+With only **1.32M parameters** and **2.58 GFLOPs**, DB-KANet achieves a strong balance between forecasting accuracy and computational efficiency, making it suitable for operational nowcasting and edge-deployment scenarios.
 
-matplotlib>=3.5.0
+---
 
-scikit-learn>=1.0.0
+## Highlights
 
-scikit-image>=0.19.0
+- Lightweight U-shaped encoder–decoder architecture.
+- Global–local feature modeling through DBAM.
+- Nonlinear precipitation dynamics modeling through CKAN.
+- Efficient inference with only **1.32M parameters** and **2.58 GFLOPs**.
+- Evaluated on both regional-scale and urban-scale precipitation datasets.
+- Designed for real-time precipitation monitoring and disaster early-warning applications.
 
-tqdm>=4.62.0
+---
 
-Dataset Preparation
-The training and evaluation scripts are configured to use the Shanghai Meteorological Dataset.
+## Network Architecture
 
-Please download the dataset from Shanghai Meteorological Data Hub or contact the authors for data access.
+<p align="center">
+  <img src="assets/architecture.png" width="850">
+</p>
 
-Organize the dataset according to the following structure, which the data loader expects:
-After organizing the data, please update the dataset paths in the configuration file (configs/config_setting.py) to match your local directory structure.
+The overall framework of DB-KANet follows an encoder–decoder design with skip connections. DBAM and CKAN blocks are embedded into the network to improve feature representation while maintaining low computational cost.
 
-Usage
-All training, validation, and testing parameters can be configured in the configs/config_setting.py file.
+### Dual-Branch Attention Module
 
-Training
-To train the DB-KANet model from scratch, run the following command from the project's root directory:
+DBAM divides feature channels into two specialized branches:
 
-bash
-python train.py
-Training logs will be saved to the log/ directory, and model checkpoints will be saved to the checkpoints/ directory within your specified work_dir. The best model checkpoint (best.pth) will be saved based on the validation loss.
+- A **global branch** for long-range dependency modeling.
+- A **local branch** for fine-grained spatial structure extraction.
 
-Evaluation
-The training script automatically performs validation after each epoch. Upon completion of training, it will load the best-performing model (best.pth) and run a final evaluation on the test set.
+The two branches are fused through lightweight convolution and residual connection, enabling efficient global–local spatiotemporal feature aggregation.
 
-If you wish to evaluate a pretrained model directly, you can modify the resume_model path in train.py and adapt the script to skip the training loop.
+### Convolutional KAN Block
 
-Pretrained Models
-We provide the pretrained model weights for DB-KANet in the pretrained_models/ directory.
+CKAN introduces Kolmogorov–Arnold Network principles into convolutional feature learning. It combines:
 
-Download pretrained models
+- A nonlinear basis-function path for adaptive nonlinear modeling.
+- A residual convolutional path for preserving local inductive bias.
+- Lightweight fusion for efficient feature transformation.
 
-Results
-Our model achieves state-of-the-art or competitive performance on the LAPS and Shanghai datasets while maintaining superior efficiency. For detailed quantitative results, visual comparisons, and ablation studies, please refer to our paper.
+This design improves the model's ability to represent nonlinear and rapidly evolving precipitation patterns.
 
-Key Results:
+---
 
-Parameters: 2.1M (75% reduction compared to baseline)
+## Repository Structure
 
-Inference Speed: 45 FPS on NVIDIA RTX 3090
+The recommended repository structure is:
 
-Accuracy: 94.2% on Shanghai test set
-
-SSIM: 0.923 on cloud mask prediction
-
-Citation
-If you find our work useful for your research, please consider citing our paper:
-
-@article{wang2025dbkanet,
-  title={DB-KANet: Lightweight Dual-Branch Kolmogorov-Arnold Network for Cloud Mask Nowcasting},
-  author={Wang, Sihan and Huang, Xiaohui and Zhang, Wei and Li, Ming},
-  journal={IEEE Transactions on Industrial Informatics},
-  year={2025},
-  volume={21},
-  number={3},
-  pages={2456--2468},
-  doi={10.1109/TII.2024.1234567}
-}
-License
-This project is licensed under the MIT License. See the LICENSE file for details.
-
-Acknowledgements
-We would like to thank the Shanghai Meteorological Bureau for providing the dataset, and the developers of PyTorch and related open-source libraries that made this research possible. This work was supported by the National Natural Science Foundation of China (Grant No. 62171234) and the Key Research and Development Program of Zhejiang Province (Grant No. 2023C01024).
-
-
+```text
+DB-KANet/
+├── assets/
+│   ├── architecture.png
+│   ├── laps_visualization.png
+│   ├── shanghai_visualization.png
+│   └── results_curve.png
+├── configs/
+│   └── config_setting.py
+├── dataset/
+│   ├── Shanghai.py
+│   └── metrics.py
+├── models/
+│   └── DB_KANet.py
+├── dataprepare/
+├── engine.py
+├── train.py
+├── utils.py
+├── requirements.txt
+├── README.md
+└── LICENSE
