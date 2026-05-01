@@ -425,15 +425,10 @@ For questions about the paper or code, please contact:
 ```text
 Sihan Wang
 East China Jiaotong University
-Email: 2024068061200009@ecjtu.edu.cn
+Email: 827815700@qq.com
 ```
 
-Corresponding author:
 
-```text
-Xiaohui Huang
-Email: huangxiaohui@ecjtu.edu.cn
-```
 
 ---
 
