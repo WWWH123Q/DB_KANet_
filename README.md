@@ -371,19 +371,6 @@ torch.Size([1, 20, 256, 256])
 
 ---
 
-## 📦 Pretrained Models
-
-Pretrained models will be released after paper acceptance.
-
-The recommended checkpoint structure is:
-
-```text
-checkpoints/
-├── dbkanet_laps.pth
-└── dbkanet_shanghai.pth
-```
-
-After downloading the pretrained weights, place them under the `checkpoints/` directory.
 
 ---
 
